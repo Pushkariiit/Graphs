@@ -1,0 +1,55 @@
+Minimum Spanning tree : 
+A tree in which there are N nodes and (N-1) edges is known as MST
+Note : if all the edes of graph are unique then only 1 MST possible
+Note : in an undirected graph total : n^(n-2) mst are possible
+
+2 algorithms are used to find mst : 
+1) Prim's algorithm
+2) Krushkal's Algorithm
+
+// Prim's Algorithm
+
+Code to find sum of MST
+
+
+int spanningTree(int V, vector<vector<int>> adj[])
+    {
+        // code here
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+// Min-Heap bana lo
+        
+        // {wt,node}
+        
+        vector<int>vis(V,0);
+        
+        pq.push({0,0});
+        int sum=0;
+// O(E)
+        while(!pq.empty()){
+// ElogE
+            auto it = pq.top();
+            pq.pop();
+            int wt = it.first;
+            int node = it.second;
+            
+            if(vis[node]==1) continue;
+            
+            // mark vis[node]=1 here
+            
+            vis[node]=1;
+            
+            sum+=wt;
+            // ElogE
+            for(auto itr:adj[node]){
+                int u = itr[0];
+                int wtt = itr[1];
+                if(!vis[u]){
+                    pq.push({wtt,u});
+                }
+            }
+        }
+        return sum;
+    }
+
+Time complexity : O(ElogE)
+Space complexity : O(E)
