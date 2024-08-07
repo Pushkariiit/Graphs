@@ -1,0 +1,36 @@
+class DisjointSet{
+    vector<int>parent,rank;
+    public:
+    DisjointSet(int n){
+        rank.resize(n+1,0);
+        parent.resize(n+1);
+        for(int i=0;i<=n;i++){
+            parent[i]=i;
+        }
+    }
+    int findPar(int node){
+        if(node==parent[node]) return node;
+        
+        return parent[node]=findPar(parent[node]);
+    }
+    
+    void unionByRank(int u,int v){
+        int ult_u = findPar(u);
+        int ult_v = findPar(v);
+        
+        if(ult_u==ult_u) continue;
+        
+        if(rank[ult_u]<rank[ult_v]){
+            parent[ult_u]=ult_v;
+        }
+        else if(rank[ult_u]>rank[ult_v]){
+            parent[ult_v]=ult_u;
+        }
+        else{
+            parent[ult_v]=ult_u;
+            rank[ult_u]++;
+        }
+    }
+}
+
+// TC : O(4a) a is alpha very small therefore O(k)
