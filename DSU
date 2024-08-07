@@ -18,7 +18,7 @@ class DisjointSet{
         int ult_u = findPar(u);
         int ult_v = findPar(v);
         
-        if(ult_u==ult_u) continue;
+        if(ult_u==ult_u) return;
         
         if(rank[ult_u]<rank[ult_v]){
             parent[ult_u]=ult_v;
